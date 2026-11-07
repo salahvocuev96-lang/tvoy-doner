@@ -44,7 +44,7 @@ const MENU: {
     ],
   },
   {
-    category: "pastry",
+    category: "bakery",
     items: [
       { name: "Лепёшка большая",     slug: "lepyoshka-bolshaya",     price: 120, weight_g: 550, sort_order: 10 },
       { name: "Лепёшка маленькая",   slug: "lepyoshka-malenkaya",    price: 50,  weight_g: 250, sort_order: 20 },
@@ -112,7 +112,7 @@ export async function GET(req: NextRequest) {
   await supabase
     .from("categories")
     .update({ is_active: true })
-    .in("slug", ["shawarma", "drinks", "extras", "sides", "pastry"]);
+    .in("slug", ["shawarma", "drinks", "extras", "sides", "bakery"]);
 
   // Получаем категории
   const { data: cats } = await supabase.from("categories").select("id, slug");
