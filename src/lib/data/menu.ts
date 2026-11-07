@@ -14,7 +14,7 @@ const bySort = (a: { sort_order: number; name: string }, b: { sort_order: number
 /** Публичное меню: только активные категории и товары (RLS + фильтр). */
 export async function getMenu(combosEnabled: boolean): Promise<MenuData> {
   "use cache";
-  cacheLife("hours");
+  cacheLife("minutes");
   cacheTag(CACHE_TAGS.menu, CACHE_TAGS.settings);
 
   const supabase = createPublicClient();
