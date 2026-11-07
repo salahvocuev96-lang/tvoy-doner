@@ -15,6 +15,8 @@ import { ReviewsSection } from "@/components/reviews/ReviewsSection";
 import { Contacts } from "@/components/site/Contacts";
 import { Footer } from "@/components/site/Footer";
 
+export const instant = false;
+
 export default async function Home() {
   const settings = await getStoreSettings();
   const [menu, reviews] = await Promise.all([getMenu(settings.combosEnabled), getPublishedReviews()]);
