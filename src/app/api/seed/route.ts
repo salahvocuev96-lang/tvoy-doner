@@ -136,7 +136,7 @@ export async function GET(req: NextRequest) {
   const { error } = await supabase.from("products").insert(rows);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
-  revalidateTag("menu");
+  revalidateTag("menu", "minutes");
 
   return NextResponse.json({ ok: true, inserted: rows.length });
 }

@@ -1,7 +1,5 @@
-import { cacheLife, cacheTag } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
 import type { MenuCategory, Product } from "@/types";
-import { CACHE_TAGS } from "./tags";
 
 export interface MenuData {
   categories: MenuCategory[];
@@ -13,9 +11,6 @@ const bySort = (a: { sort_order: number; name: string }, b: { sort_order: number
 
 /** Публичное меню: только активные категории и товары (RLS + фильтр). */
 export async function getMenu(combosEnabled: boolean): Promise<MenuData> {
-  "use cache";
-  cacheLife("minutes");
-  cacheTag(CACHE_TAGS.menu, CACHE_TAGS.settings);
 
   const supabase = createPublicClient();
   if (!supabase) return { categories: [], error: true };
