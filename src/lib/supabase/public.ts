@@ -10,8 +10,5 @@ export function createPublicClient() {
   if (!isSupabaseConfigured) return null;
   return createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     auth: { persistSession: false, autoRefreshToken: false },
-    // Кэшированием управляют функции с "use cache" и теги (сбрасываются из админки).
-    // Отключаем кэш отдельных запросов, чтобы не получить устаревшие данные со сборки.
-    global: { fetch: (input, init) => fetch(input, { ...init, cache: "no-store" }) },
   });
 }
