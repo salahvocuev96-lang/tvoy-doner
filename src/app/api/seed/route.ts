@@ -103,6 +103,7 @@ export async function GET(req: NextRequest) {
   }
 
   const supabase = createServiceClient();
+  if (!supabase) return NextResponse.json({ error: "Supabase not configured" }, { status: 500 });
 
   // Удаляем старые данные
   await supabase.from("products").delete().neq("id", "00000000-0000-0000-0000-000000000000");
