@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import { createServiceClient } from "@/lib/supabase/service";
 
 // Одноразовый эндпоинт для заливки меню.
@@ -134,6 +135,8 @@ export async function GET(req: NextRequest) {
 
   const { error } = await supabase.from("products").insert(rows);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  revalidateTag("menu");
 
   return NextResponse.json({ ok: true, inserted: rows.length });
 }
