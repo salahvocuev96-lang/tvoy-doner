@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createServiceSupabase } from "@/lib/supabase/service";
+import { createServiceClient } from "@/lib/supabase/service";
 
 // Одноразовый эндпоинт для заливки меню.
 // Защищён секретом из переменной окружения SEED_SECRET.
 // После использования переменную можно удалить из Vercel.
-
-export const runtime = "nodejs";
 
 const MENU: {
   category: string;
@@ -104,7 +102,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
-  const supabase = createServiceSupabase();
+  const supabase = createServiceClient();
 
   // Удаляем старые данные
   await supabase.from("products").delete().neq("id", "00000000-0000-0000-0000-000000000000");
