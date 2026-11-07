@@ -7,7 +7,7 @@ import { createServiceClient } from "@/lib/supabase/service";
 
 const MENU: {
   category: string;
-  items: { name: string; slug: string; price: number; weight_g: number; popular?: boolean; sort_order: number }[];
+  items: { name: string; slug: string; price: number; weight_g: number; popular?: boolean; sort_order: number }[]; // slug kept for reference, not inserted
 }[] = [
   {
     category: "shawarma",
@@ -124,11 +124,10 @@ export async function GET(req: NextRequest) {
     items.map((item) => ({
       category_id: catMap[category],
       name: item.name,
-      slug: item.slug,
       price: item.price,
-      weight_g: item.weight_g,
+      weight: `${item.weight_g} г`,
       is_available: true,
-      is_popular: item.popular ?? false,
+      is_featured: item.popular ?? false,
       sort_order: item.sort_order,
     }))
   );
