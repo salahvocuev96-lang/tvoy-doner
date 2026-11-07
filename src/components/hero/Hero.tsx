@@ -127,7 +127,7 @@ export function Hero({ settings }: { settings: StoreSettings }) {
           </motion.ul>
         </motion.div>
 
-        <div className="relative -my-6 max-md:max-h-[44svh] max-md:[&>div]:max-w-[min(340px,40svh)] md:my-0 md:self-center [grid-area:stage]">
+        <div className="relative -my-6 max-md:max-h-[56svh] max-md:[&>div]:max-w-[min(400px,52svh)] md:my-0 md:self-center [grid-area:stage]">
           <ShawarmaStage label={settings.name} progress={scrollYProgress} />
         </div>
       </div>

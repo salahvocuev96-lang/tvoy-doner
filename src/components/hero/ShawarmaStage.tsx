@@ -59,7 +59,7 @@ export function ShawarmaStage({ label, progress }: { label: string; progress: Mo
   const sway = useTransform(time, (t) => (reduce ? 0 : Math.sin(t / 2600) * 20));
   const turn = useTransform(() => sway.get() + smx.get() * 12);
   const tiltX = useTransform(smy, (v) => -v * 8);
-  const bob = useTransform(time, (t) => (reduce ? 0 : Math.sin(t / 900) * 8));
+  const bob = useTransform(time, (t) => (reduce ? 0 : Math.sin(t / 1200) * 18));
 
   // Прокрутка → шаурма уходит вниз и уменьшается
   const scrollY = useTransform(progress, [0, 1], [0, reduce ? 0 : 160]);
@@ -170,7 +170,7 @@ export function ShawarmaStage({ label, progress }: { label: string; progress: Mo
 
       {/* Шаурма */}
       <motion.div
-        className="absolute inset-[6%_14%_2%] z-10 [transform-style:preserve-3d]"
+        className="absolute inset-[-4%_4%_-2%] z-10 [transform-style:preserve-3d]"
         initial={{ opacity: 0, y: 80, scale: 0.86, filter: "blur(12px)" }}
         animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         transition={{ duration: 1.3, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
@@ -195,7 +195,7 @@ export function ShawarmaStage({ label, progress }: { label: string; progress: Mo
               ))}
             </svg>
           {heroImage ? (
-            <Image src={heroImage} alt={label} fill priority sizes="(max-width: 768px) 80vw, 480px" className="object-contain" />
+            <Image src={heroImage} alt={label} fill priority sizes="(max-width: 768px) 80vw, 480px" className="object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,.6)]" />
           ) : (
             <ShawarmaArt turn={turn} label={label} />
           )}
