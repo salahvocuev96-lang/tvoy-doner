@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+/* ===================== Дизайн-система ===================== */
+@theme {
+  --color-coffee: #211712;
+  --color-coffee-900: #170f0b;
+  --color-coffee-800: #2a1e17;
+  --color-coffee-700: #36271e;
+  --color-coffee-600: #4a372b;
+  --color-cream: #f4e6ce;
+  --color-cream-200: #ead8b8;
+  --color-cream-300: #d9c3a0;
+  --color-gold: #d99a45;
+  --color-gold-300: #e9b872;
+  --color-gold-600: #b97a2c;
+  --color-terracotta: #a94327;
+  --color-terracotta-400: #c25a3b;
+  --color-olive: #667344;
+  --color-olive-300: #8a9862;
+
+  --font-display: var(--font-unbounded), "Arial Black", sans-serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-flicker: flicker 3.2s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes flicker {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50% { opacity: 0.85; transform: scale(1.06); }
+  }
+}
+
+:root {
+  color-scheme: dark;
+  --header-h: 76px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 12px);
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--color-coffee);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-coffee);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Зернистость поверх фона — даёт «бумажную» фактуру */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Восточный геометрический орнамент */
+.pattern-girih {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23d99a45' stroke-width='0.8'><path d='M40 6 L49 31 L74 40 L49 49 L40 74 L31 49 L6 40 L31 31 Z'/><path d='M16 16 L40 26 L64 16 L54 40 L64 64 L40 54 L16 64 L26 40 Z'/><circle cx='40' cy='40' r='6'/></g></svg>");
+  background-size: 80px 80px;
+}
+
+.text-balance { text-wrap: balance; }
+
+/* Искры и пар на первом экране */
+.ember {
+  opacity: 0;
+  box-shadow: 0 0 8px 2px rgba(233, 184, 114, 0.7);
+  animation: ember-rise 5s ease-out infinite;
+}
+@keyframes ember-rise {
+  0% { transform: translate(0, 0) scale(1); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translate(18px, -320px) scale(0.3); opacity: 0; }
+}
+.steam {
+  stroke-dasharray: 160;
+  stroke-dashoffset: 160;
+  opacity: 0;
+  animation: steam 3.4s ease-in-out infinite;
+}
+@keyframes steam {
+  0% { stroke-dashoffset: 160; opacity: 0; transform: translateY(10px); }
+  35% { opacity: 0.28; }
+  100% { stroke-dashoffset: -160; opacity: 0; transform: translateY(-16px); }
+}
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
